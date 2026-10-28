@@ -18,9 +18,8 @@
         .form-group { margin-bottom: 20px; }
         .login-body label { display: block; font-size: 0.9rem; font-weight: 600; color: #1f4a66; margin-bottom: 7px; }
         .login-body input { width: 100%; padding: 14px 18px; border-radius: 20px; border: 1.5px solid #d9e4ee; font-size: 1rem; outline: none; background: #f8fbfe; }
-        .login-btn { width: 100%; padding: 15px; border-radius: 40px; border: none; background: #0b2b44; color: white; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 6px; }
+        .login-btn { width: 100%; padding: 15px; border-radius: 40px; border: none; background: #0b2b44; color: white; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 6px; transition: background 0.15s; }
         .login-btn:hover { background: #1a4a6f; }
-        .login-hint { margin-top: 18px; font-size: 0.8rem; color: #7a93a6; text-align: center; background: #f4f8fc; padding: 12px; border-radius: 16px; border: 1px dashed #cddae5; }
         .login-error { color: #b3452c; font-size: 0.85rem; margin-top: 10px; text-align: center; min-height: 20px; }
 
         /* 主應用 */
@@ -61,8 +60,10 @@
         .card-dept { font-size: 0.75rem; color: #7a93a6; margin-bottom: 8px; }
         
         /* 按鈕與過濾器 */
-        .btn { display: inline-flex; padding: 10px 22px; border-radius: 40px; font-weight: 600; border: 1px solid #cddae5; background: white; color: #1f4a66; cursor: pointer; }
+        .btn { display: inline-flex; padding: 10px 22px; border-radius: 40px; font-weight: 600; border: 1px solid #cddae5; background: white; color: #1f4a66; cursor: pointer; transition: all 0.15s; }
+        .btn:hover { background: #eef4fa; }
         .btn-primary { background: #0b2b44; color: white; border-color: #0b2b44; }
+        .btn-primary:hover { background: #1a4a6f; }
         .btn-sm { padding: 6px 16px; font-size: 0.82rem; }
         .btn-ghost { background: transparent; }
         .btn-danger { background: #b3452c; color: white; border-color: #b3452c; }
@@ -88,18 +89,23 @@
         /* 場次與登記面板 */
         .session-panel { background: #f0f7fe; border: 2px solid #4a7ab5; border-radius: 24px; padding: 22px 26px; margin-bottom: 24px; }
         .session-panel .session-body { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
-        .session-panel .field { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+        .session-panel .field { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 150px; }
         .session-panel .field label { font-size: 0.82rem; font-weight: 600; color: #1c4a7a; }
         .session-panel .field select, .session-panel .field input { padding: 10px 14px; border-radius: 14px; border: 1px solid #b6cfe6; }
         .record-panel { background: #fffbf2; border: 2px solid #f5b042; border-radius: 24px; padding: 22px 26px; margin-bottom: 24px; display: none; }
         .record-panel.show { display: block; }
         .record-panel-body { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
         .status-quick-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-        .status-quick-btn { padding: 8px 18px; border-radius: 30px; border: 1.5px solid #e0d5c0; background: white; font-weight: 600; cursor: pointer; }
+        .status-quick-btn { padding: 8px 18px; border-radius: 30px; border: 1.5px solid #e0d5c0; background: white; font-weight: 600; cursor: pointer; transition: all 0.12s; }
         .status-quick-btn.selected { background: #f5b042; color: #0b2b44; border-color: #f5b042; }
+        .status-quick-btn[data-status="準時"].selected { background: #1f8b4c; color: white; border-color: #1f8b4c; }
+        .status-quick-btn[data-status="遲到"].selected { background: #e09e2e; color: white; border-color: #e09e2e; }
+        .status-quick-btn[data-status="早退"].selected { background: #d36b4a; color: white; border-color: #d36b4a; }
+        .status-quick-btn[data-status="請假"].selected { background: #4a7ab5; color: white; border-color: #4a7ab5; }
+        .status-quick-btn[data-status="缺席"].selected { background: #b3452c; color: white; border-color: #b3452c; }
         
         /* 其他 */
-        .toast-message { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #0b2b44; color: white; padding: 14px 28px; border-radius: 40px; opacity: 0; transition: opacity 0.25s; z-index: 2000; pointer-events: none; font-weight: 600;}
+        .toast-message { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #0b2b44; color: white; padding: 14px 28px; border-radius: 40px; opacity: 0; transition: opacity 0.25s; z-index: 2000; pointer-events: none; font-weight: 600; }
         .toast-message.show { opacity: 1; }
         .loading-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.85); display:none; align-items:center; justify-content:center; z-index:9999; font-size:1.2rem; font-weight:bold; color:#0b2b44; }
         .loading-overlay.show { display:flex; }
@@ -110,6 +116,12 @@
         .tag-pass { background: #dff0e3; color: #1d6f3a; }
         .tag-warning { background: #fff0d6; color: #a86d0e; }
         .tag-fail { background: #fce1e1; color: #a82e2e; }
+        .tag-untracked { background: #f0f4f8; color: #6e8da3; }
+        .mini-ontime { background: #dff0e3; color: #1d6f3a; }
+        .mini-late { background: #fff0d6; color: #a86d0e; }
+        .mini-early { background: #ffe4df; color: #b3452c; }
+        .mini-leave { background: #e1e9f7; color: #315f9e; }
+        .mini-absent { background: #fce1e1; color: #a82e2e; }
     </style>
 </head>
 <body>
@@ -123,7 +135,7 @@
         <div class="login-header">
             <div class="logo">🏫</div>
             <h1>粵華中學學生會</h1>
-            <p>出勤考察系統 · 雲端同步版</p>
+            <p>出勤考察系統</p>
         </div>
         <div class="login-body">
             <div class="form-group">
@@ -136,10 +148,6 @@
             </div>
             <button class="login-btn" id="loginBtn">登 入</button>
             <div class="login-error" id="loginError"></div>
-            <div class="login-hint">
-                演示帳戶：<code>admin</code> / 密碼：<code>123456</code><br>
-                所有數據已連接雲端資料庫，跨裝置即時同步。
-            </div>
         </div>
     </div>
 </div>
@@ -180,12 +188,8 @@
                     </select>
                 </div>
                 <div style="display:flex; flex-direction:column; gap:4px;">
-                    <label style="font-size:0.78rem; font-weight:600; color:#4a6579;">📅 開始日期</label>
-                    <input type="date" id="overviewStartDate">
-                </div>
-                <div style="display:flex; flex-direction:column; gap:4px;">
-                    <label style="font-size:0.78rem; font-weight:600; color:#4a6579;">📅 結束日期</label>
-                    <input type="date" id="overviewEndDate">
+                    <label style="font-size:0.78rem; font-weight:600; color:#4a6579;">📅 日期</label>
+                    <input type="date" id="overviewDateFilter">
                 </div>
                 <button class="btn btn-ghost btn-sm" id="clearOverviewFilterBtn" style="align-self:flex-end;">清除篩選</button>
             </div>
@@ -194,13 +198,13 @@
             <div class="stats-grid" id="dashboardStats"></div>
 
             <div style="display:flex; justify-content:space-between; align-items:center; margin:16px 0 8px;">
-                <h3 style="color: #0b2b44; font-size: 1.2rem;">⚠️ 近期預警成員</h3>
+                <h3 id="warningTableTitle" style="color: #0b2b44; font-size: 1.2rem;">⚠️ 近期預警成員</h3>
                 <button class="btn btn-sm btn-ghost" id="refreshWarningsBtn">刷新</button>
             </div>
             <div class="table-wrapper">
                 <table>
-                    <thead>
-                        <tr><th>姓名</th><th>部門</th><th>出勤率</th><th>無故缺席</th><th>考核等級</th><th>狀態</th></tr>
+                    <thead id="warningTableHead">
+                        <!-- 動態生成表頭 -->
                     </thead>
                     <tbody id="warningTableBody"></tbody>
                 </table>
@@ -215,7 +219,7 @@
                     <div id="sessionBadge" style="background:white; border:1px solid #b6cfe6; border-radius:30px; padding:6px 16px; font-size:0.85rem; font-weight:600; color:#1c4a7a;">尚未設定場次</div>
                 </div>
                 <div id="sessionStatusHint" style="font-size: 0.85rem; color: #a86d0e; background: #fff6e0; padding: 8px 16px; border-radius: 14px; margin-bottom: 14px;">
-                    ⚠️ 請先設定活動類型與日期，然後勾選下方成員卡片登記考察狀態
+                    ⚠️ 請先設定活動類型、活動項目與日期，然後勾選下方成員卡片登記考察狀態
                 </div>
                 <div class="session-body">
                     <div class="field">
@@ -225,6 +229,19 @@
                             <option value="學生會室當值">學生會室當值</option>
                             <option value="大型活動">大型活動</option>
                             <option value="培訓">培訓</option>
+                        </select>
+                    </div>
+                    <div class="field" style="flex: 1.5;">
+                        <label>活動項目</label>
+                        <select id="sessionEventSelect">
+                            <option value="無">無</option>
+                            <option value="明愛慈善園遊會BINGO">明愛慈善園遊會BINGO</option>
+                            <option value="歌唱比賽">歌唱比賽</option>
+                            <option value="友校交流">友校交流</option>
+                            <option value="學社推廣日">學社推廣日</option>
+                            <option value="粵華論壇">粵華論壇</option>
+                            <option value="學生會換屆選舉">學生會換屆選舉</option>
+                            <option value="新生遊校園">新生遊校園</option>
                         </select>
                     </div>
                     <div class="field">
@@ -402,11 +419,11 @@
 <!-- ================= 引入 Firebase SDK ================= -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, doc, getDocs, setDoc, deleteDoc, onSnapshot, writeBatch } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot, writeBatch } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     // ==================== 1. 填寫您的 Firebase 設定 ====================
     // ⚠️ 請將以下內容替換為您在 Firebase 控制台取得的真實設定 ⚠️
-    const firebaseConfig = {
+        const firebaseConfig = {
         apiKey: "AIzaSyAd90Gkr0AxEKSS9ieBBTQkcxFAafdTKK0",
         authDomain: "ywcsu-786da.firebaseapp.com",
         projectId: "ywcsu-786da",
@@ -414,8 +431,7 @@
         messagingSenderId: "589838958960",
         appId: "1:589838958960:web:5b8af54edbe698c5664fb5",
         measurementId: "G-Q06J37C3FV"
-};
-
+    };
     // 初始化 Firebase
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
@@ -432,10 +448,11 @@
     let selectedMemberIds = new Set();
     let panelSelectedStatus = null;
     let pendingDeleteMemberId = null;
-    let currentSession = { scene: null, date: null, applied: false };
+    let currentSession = { scene: null, event: null, date: null, applied: false };
 
+    // 更新後的帳戶與密碼
     const ACCOUNTS = [
-        { account: 'admin', password: '123456', displayName: '管理員（主席團）', role: 'admin' }
+        { account: 'ywcsu', password: 'su315484', displayName: '學生會管理員', role: 'admin' }
     ];
 
     // ==================== 3. 雲端資料庫連線與監聽 ====================
@@ -557,18 +574,17 @@
 
     function renderDashboard() {
         const sceneFilter = document.getElementById('overviewSceneFilter').value;
-        const startDate = document.getElementById('overviewStartDate').value;
-        const endDate = document.getElementById('overviewEndDate').value;
+        const dateFilter = document.getElementById('overviewDateFilter').value;
+        
         const filteredRecords = attendanceRecords.filter(r => {
             if (sceneFilter !== 'all' && r.scene !== sceneFilter) return false;
-            if (startDate && r.date < startDate) return false;
-            if (endDate && r.date > endDate) return false;
+            if (dateFilter && r.date !== dateFilter) return false;
             return true;
         });
 
         const infoDiv = document.getElementById('overviewResultInfo');
-        if (sceneFilter !== 'all' || startDate || endDate) {
-            infoDiv.innerHTML = `🔍 篩選條件：${sceneFilter !== 'all' ? sceneFilter : '全部'} · ${startDate || '不限'} 至 ${endDate || '不限'} · 符合記錄 <strong>${filteredRecords.length}</strong> 條`;
+        if (sceneFilter !== 'all' || dateFilter) {
+            infoDiv.innerHTML = `🔍 篩選條件：${sceneFilter !== 'all' ? sceneFilter : '全部活動'} · ${dateFilter || '不限日期'} · 符合記錄 <strong>${filteredRecords.length}</strong> 條`;
         } else {
             infoDiv.innerHTML = `🔍 目前顯示：<strong>全部活動及日期</strong> · 總記錄 <strong>${filteredRecords.length}</strong> 條`;
         }
@@ -583,43 +599,87 @@
         });
         const overallRate = totalExpected > 0 ? Math.round((totalPresent / totalExpected) * 10000) / 100 : 100;
         
+        const rateLabel = sceneFilter === '內閣例會' ? '核心內閣出勤率' : '整體出勤率';
+
         statsGrid.innerHTML = `
             <div class="stat-card"><div class="label">學生會成員</div><div class="value">${members.length}</div><div class="sub">在任成員總數</div></div>
             <div class="stat-card"><div class="label">考勤記錄</div><div class="value">${filteredRecords.length}</div><div class="sub">符合篩選條件</div></div>
-            <div class="stat-card"><div class="label">整體出勤率</div><div class="value">${overallRate}%</div><div class="sub">基於篩選記錄</div></div>
+            <div class="stat-card"><div class="label">${rateLabel}</div><div class="value">${overallRate}%</div><div class="sub">基於篩選記錄</div></div>
             <div class="stat-card"><div class="label">無故缺席</div><div class="value" style="color:#b3452c;">${filteredRecords.filter(r => r.status === '缺席').length}</div><div class="sub">符合篩選次數</div></div>
         `;
 
-        const warnings = members.map(m => ({ member: m, stats: getMemberStats(m.id, filteredRecords) }))
-            .filter(item => item.stats.total > 0 && (item.stats.attendanceRate < 80 || item.stats.absentCount >= 1));
-        
         const tbody = document.getElementById('warningTableBody');
-        tbody.innerHTML = warnings.length === 0 ? `<tr><td colspan="6" style="text-align:center;">✅ 所選條件下暫無預警成員</td></tr>` : 
-            warnings.map(item => {
-                const m = item.member, s = item.stats;
-                const gradeClass = s.grade === '優秀' ? 'tag-excellent' : (s.grade === '合格' ? 'tag-pass' : (s.grade === '預警' ? 'tag-warning' : 'tag-fail'));
-                return `<tr>
-                    <td><div style="display:flex; align-items:center; gap:10px;">${avatarHtml(m)}<strong>${m.name}</strong></div></td>
-                    <td>${m.dept}</td>
-                    <td>${s.attendanceRate}%</td>
-                    <td style="color:${s.absentCount>0?'#b3452c':'inherit'}">${s.absentCount}</td>
-                    <td><span class="tag ${gradeClass}">${s.grade}</span></td>
-                    <td>${s.attendanceRate<60?'⚠️ 嚴重預警':(s.absentCount>=1?'⚠️ 需關注':'正常')}</td>
-                </tr>`;
-            }).join('');
+        const thead = document.getElementById('warningTableHead');
+        const title = document.getElementById('warningTableTitle');
+
+        if (sceneFilter === '內閣例會') {
+            // 顯示核心內閣出席狀況列表
+            title.textContent = '👥 核心內閣出席狀況列表';
+            thead.innerHTML = `
+                <tr><th>姓名</th><th>職務</th><th>出席狀態</th><th>備註</th></tr>
+            `;
+            
+            const cabinetMembers = members.filter(m => m.dept === '核心內閣');
+            if (cabinetMembers.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">暫無核心內閣成員</td></tr>`;
+            } else {
+                tbody.innerHTML = cabinetMembers.map(m => {
+                    const record = filteredRecords.find(r => r.memberId === m.id);
+                    let statusHtml = `<span class="tag tag-untracked">未登記</span>`;
+                    let noteText = '-';
+                    if (record) {
+                        const cls = record.status === '準時' ? 'tag-pass' : 
+                                    (record.status === '遲到' ? 'tag-warning' : 
+                                    (record.status === '早退' ? 'tag-fail' : 
+                                    (record.status === '請假' ? 'tag-untracked' : 'tag-fail')));
+                        statusHtml = `<span class="tag ${cls}">${record.status}</span>`;
+                        noteText = record.note || '-';
+                    }
+                    return `<tr>
+                        <td><div style="display:flex; align-items:center; gap:10px;">${avatarHtml(m)}<strong>${m.name}</strong></div></td>
+                        <td>${m.role}</td>
+                        <td>${statusHtml}</td>
+                        <td>${noteText}</td>
+                    </tr>`;
+                }).join('');
+            }
+        } else {
+            // 顯示預警成員
+            title.textContent = '⚠️ 近期預警成員';
+            thead.innerHTML = `
+                <tr><th>姓名</th><th>部門</th><th>出勤率</th><th>無故缺席</th><th>考核等級</th><th>狀態</th></tr>
+            `;
+
+            const warnings = members.map(m => ({ member: m, stats: getMemberStats(m.id, filteredRecords) }))
+                .filter(item => item.stats.total > 0 && (item.stats.attendanceRate < 80 || item.stats.absentCount >= 1));
+            
+            tbody.innerHTML = warnings.length === 0 ? `<tr><td colspan="6" style="text-align:center;">✅ 所選條件下暫無預警成員</td></tr>` : 
+                warnings.map(item => {
+                    const m = item.member, s = item.stats;
+                    const gradeClass = s.grade === '優秀' ? 'tag-excellent' : (s.grade === '合格' ? 'tag-pass' : (s.grade === '預警' ? 'tag-warning' : 'tag-fail'));
+                    return `<tr>
+                        <td><div style="display:flex; align-items:center; gap:10px;">${avatarHtml(m)}<strong>${m.name}</strong></div></td>
+                        <td>${m.dept}</td>
+                        <td>${s.attendanceRate}%</td>
+                        <td style="color:${s.absentCount>0?'#b3452c':'inherit'}">${s.absentCount}</td>
+                        <td><span class="tag ${gradeClass}">${s.grade}</span></td>
+                        <td>${s.attendanceRate<60?'⚠️ 嚴重預警':(s.absentCount>=1?'⚠️ 需關注':'正常')}</td>
+                    </tr>`;
+                }).join('');
+        }
     }
 
     function updateSessionUI() {
         const badge = document.getElementById('sessionBadge');
         const hint = document.getElementById('sessionStatusHint');
         if (currentSession.applied) {
-            badge.innerHTML = `📌 場次：<strong>${currentSession.scene}</strong> · <strong>${currentSession.date}</strong>`;
+            badge.innerHTML = `📌 場次：<strong>${currentSession.event}</strong> (${currentSession.scene} · ${currentSession.date})`;
             hint.style.background = '#dff0e3'; hint.style.color = '#1d6f3a';
             hint.innerHTML = `✅ 場次已設定！勾選下方成員卡片後可批次登記。`;
         } else {
             badge.textContent = '尚未設定場次';
             hint.style.background = '#fff6e0'; hint.style.color = '#a86d0e';
-            hint.innerHTML = '⚠️ 請先設定活動類型與日期，然後勾選下方成員卡片登記考察狀態';
+            hint.innerHTML = '⚠️ 請先設定活動類型、活動項目與日期，然後勾選下方成員卡片登記考察狀態';
         }
     }
 
@@ -743,11 +803,12 @@
     // ==================== 6. 事件綁定 ====================
     document.getElementById('applySessionBtn').addEventListener('click', () => {
         const scene = document.getElementById('sessionSceneSelect').value;
+        const event = document.getElementById('sessionEventSelect').value;
         const date = document.getElementById('sessionDateInput').value;
         if (!date) return alert('請選擇日期');
-        currentSession = { scene, date, applied: true };
+        currentSession = { scene, event, date, applied: true };
         updateSessionUI();
-        showToast(`✅ 已設定場次：${scene}（${date}）`);
+        showToast(`✅ 已設定場次：${event}（${date}）`);
     });
 
     window.toggleMemberSelection = function(id) {
@@ -795,7 +856,12 @@
         loadingOverlay.classList.add('show');
         const note = document.getElementById('recordNoteInput').value.trim();
         const recordsToAdd = Array.from(selectedMemberIds).map(id => ({
-            memberId: id, scene: currentSession.scene, status: panelSelectedStatus, date: currentSession.date, note
+            memberId: id, 
+            scene: currentSession.scene, 
+            event: currentSession.event,
+            status: panelSelectedStatus, 
+            date: currentSession.date, 
+            note
         }));
         await addAttendanceRecordsToDB(recordsToAdd);
         selectedMemberIds.clear();
@@ -911,13 +977,13 @@
         });
     });
 
-    ['overviewSceneFilter', 'overviewStartDate', 'overviewEndDate'].forEach(id => {
+    // 更新總覽篩選事件監聽
+    ['overviewSceneFilter', 'overviewDateFilter'].forEach(id => {
         document.getElementById(id).addEventListener('change', renderDashboard);
     });
     document.getElementById('clearOverviewFilterBtn').addEventListener('click', () => {
         document.getElementById('overviewSceneFilter').value = 'all';
-        document.getElementById('overviewStartDate').value = '';
-        document.getElementById('overviewEndDate').value = '';
+        document.getElementById('overviewDateFilter').value = '';
         renderDashboard();
     });
 
